@@ -38,6 +38,9 @@ export default function Navbar() {
           <NavLink href="/" icon={Home}>
             Home
           </NavLink>
+          <NavLink href="/projects-gallery" icon={Home}>
+            Project Gallery
+          </NavLink>
           <NavLink href="#skills" icon={Lightbulb}>
             Skills
           </NavLink>

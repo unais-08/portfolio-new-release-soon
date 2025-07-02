@@ -41,17 +41,9 @@ export async function GET(request: NextRequest) {
       ? parseInt(searchParams.get("limit")!)
       : undefined;
 
-    // Build WHERE and parameters
-    let where = "";
-    const params: any[] = [];
-
-    if (category) {
-      params.push(category);
-      where = `WHERE LOWER(category) = LOWER($${params.length})`;
-    }
-
-    let baseQuery = `
-      SELECT 
+    // Use a conditional approach directly within the sql template literal
+    const result = await sql`
+      SELECT
         id,
         name,
         description,
@@ -63,16 +55,10 @@ export async function GET(request: NextRequest) {
         created_at,
         updated_at
       FROM projects
-      ${where}
+      ${category ? sql`WHERE LOWER(category) = LOWER(${category})` : sql``}
       ORDER BY created_at DESC
+      ${limit ? sql`LIMIT ${limit}` : sql``}
     `;
-
-    if (limit) {
-      params.push(limit);
-      baseQuery += ` LIMIT $${params.length}`;
-    }
-
-    const result = await sql`${baseQuery}`;
 
     return NextResponse.json(result, { status: 200 });
   } catch (error) {

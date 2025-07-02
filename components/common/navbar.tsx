@@ -27,6 +27,9 @@ export default function Navbar() {
           <Link href="/" className="text-xl font-bold">
             Unais
           </Link>
+          <Link href="/upload-project" className="text-xl font-bold">
+            Create Projects
+          </Link>
         </div>
 
         {/* Desktop Navigation Links */}

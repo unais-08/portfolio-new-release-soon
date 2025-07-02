@@ -4,6 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
 import { ExternalLink, Github } from "lucide-react";
+
 import {
   Card,
   CardContent,
@@ -12,12 +13,35 @@ import {
   CardDescription,
   CardFooter,
 } from "@/components/ui/card";
+
 import { Button } from "@/components/ui/button";
 import { featuredProjects } from "@/utils/featured-projects";
 
-// ImageWrapper component to handle fallback
-function ImageWithFallback({ src, alt }: { src: string; alt: string }) {
-  const [imgSrc, setImgSrc] = useState(src);
+// Correct interface
+export interface Project {
+  id: string;
+  name: string;
+  description: string;
+  github_url?: string | null;
+  live_url?: string | null;
+  main_image_url?: string | null;
+  tech_stack: string[];
+  category: string;
+  created_at: string;
+  updated_at?: string;
+}
+
+// ImageWithFallback component
+function ImageWithFallback({
+  src,
+  alt,
+}: {
+  src: string | null | undefined;
+  alt: string;
+}) {
+  const [imgSrc, setImgSrc] = useState(
+    src ?? "https://placehold.co/600x400/1e293b/cbd5e1?text=Project+Image"
+  );
 
   return (
     <Image
@@ -34,6 +58,7 @@ function ImageWithFallback({ src, alt }: { src: string; alt: string }) {
   );
 }
 
+// ProjectsSection component
 export function ProjectsSection() {
   return (
     <section id="projects" className="container py-16">
@@ -48,21 +73,24 @@ export function ProjectsSection() {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {featuredProjects.map((project) => (
+        {featuredProjects.map((project: Project) => (
           <Card key={project.id} className="flex flex-col h-full">
             <CardHeader className="relative h-48 w-full overflow-hidden rounded-t-xl">
-              <ImageWithFallback src={project.image} alt={project.title} />
+              <ImageWithFallback
+                src={project.main_image_url}
+                alt={project.name}
+              />
             </CardHeader>
 
             <CardContent className="flex-grow pt-4">
               <CardTitle className="text-xl font-semibold mb-2">
-                {project.title}
+                {project.name}
               </CardTitle>
               <CardDescription className="text-sm text-muted-foreground mb-4">
                 {project.description}
               </CardDescription>
               <div className="flex flex-wrap gap-2 mt-auto">
-                {project.techStack.map((tech) => (
+                {project.tech_stack.map((tech) => (
                   <span
                     key={tech}
                     className="bg-muted text-muted-foreground text-xs px-2 py-1 rounded-full"
@@ -74,9 +102,9 @@ export function ProjectsSection() {
             </CardContent>
 
             <CardFooter className="flex justify-end gap-2">
-              {project.githubUrl && (
+              {project.github_url && (
                 <Link
-                  href={project.githubUrl}
+                  href={project.github_url}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="cursor-pointer"
@@ -91,9 +119,9 @@ export function ProjectsSection() {
                   </Button>
                 </Link>
               )}
-              {project.liveUrl && (
+              {project.live_url && (
                 <Link
-                  href={project.liveUrl}
+                  href={project.live_url}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="cursor-pointer"

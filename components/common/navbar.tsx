@@ -2,8 +2,9 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
 import { Home, Lightbulb, Code, Menu, X } from "lucide-react";
+
+import { Button } from "@/components/ui/button";
 import NavLink from "@/components/common/navlinks";
 import SocialLinks from "@/components/common/social-links";
 import { ThemeToggle } from "@/components/common/themeToggleButton";

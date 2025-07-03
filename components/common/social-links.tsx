@@ -7,7 +7,7 @@ const SocialLinks: React.FC = () => {
   return (
     <>
       <Link
-        href="https://github.com/yourusername"
+        href={process.env.GITHUB_URL || ""}
         target="_blank"
         rel="noopener noreferrer"
         aria-label="GitHub Profile"
@@ -17,7 +17,7 @@ const SocialLinks: React.FC = () => {
         </Button>
       </Link>
       <Link
-        href="https://linkedin.com/in/yourusername"
+        href={process.env.LINKEDIN_URL || ""}
         target="_blank"
         rel="noopener noreferrer"
         aria-label="LinkedIn Profile"
@@ -27,7 +27,7 @@ const SocialLinks: React.FC = () => {
         </Button>
       </Link>
       <Link
-        href="https://twitter.com/yourusername"
+        href={process.env.TWITTER_URL || ""}
         target="_blank"
         rel="noopener noreferrer"
         aria-label="Twitter Profile"

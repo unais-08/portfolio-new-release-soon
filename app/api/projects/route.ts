@@ -137,136 +137,136 @@ export async function POST(request: NextRequest) {
 
 /* GET (single project by id) */
 
-export async function GET_BY_ID(
-  request: NextRequest,
-  { params }: { params: { id: string } }
-) {
-  try {
-    const sql = await getDBConnection();
-    const { id } = params;
+// export async function GET_BY_ID(
+//   request: NextRequest,
+//   { params }: { params: { id: string } }
+// ) {
+//   try {
+//     const sql = await getDBConnection();
+//     const { id } = params;
 
-    const result = await sql`
-      SELECT 
-        id,
-        name,
-        description,
-        github_url,
-        live_url,
-        main_image_url,
-        tech_stack,
-        category,
-        created_at,
-        updated_at
-      FROM projects 
-      WHERE id = ${id}
-    `;
+//     const result = await sql`
+//       SELECT
+//         id,
+//         name,
+//         description,
+//         github_url,
+//         live_url,
+//         main_image_url,
+//         tech_stack,
+//         category,
+//         created_at,
+//         updated_at
+//       FROM projects
+//       WHERE id = ${id}
+//     `;
 
-    if (result.length === 0) {
-      return NextResponse.json({ error: "Project not found" }, { status: 404 });
-    }
+//     if (result.length === 0) {
+//       return NextResponse.json({ error: "Project not found" }, { status: 404 });
+//     }
 
-    const project = result[0];
-    project.tech_stack = JSON.parse(project.tech_stack);
+//     const project = result[0];
+//     project.tech_stack = JSON.parse(project.tech_stack);
 
-    return NextResponse.json(project, { status: 200 });
-  } catch (error) {
-    console.error("Error fetching project:", error);
-    return NextResponse.json(
-      { error: "Failed to fetch project" },
-      { status: 500 }
-    );
-  }
-}
+//     return NextResponse.json(project, { status: 200 });
+//   } catch (error) {
+//     console.error("Error fetching project:", error);
+//     return NextResponse.json(
+//       { error: "Failed to fetch project" },
+//       { status: 500 }
+//     );
+//   }
+// }
 
 /* PATCH (update project) */
 
-export async function PATCH(
-  request: NextRequest,
-  { params }: { params: { id: string } }
-) {
-  try {
-    const sql = await getDBConnection();
-    const { id } = params;
-    const body = await request.json();
+// export async function PATCH(
+//   request: NextRequest,
+//   { params }: { params: { id: string } }
+// ) {
+//   try {
+//     const sql = await getDBConnection();
+//     const { id } = params;
+//     const body = await request.json();
 
-    const validatedData = updateProjectSchema.parse(body);
+//     const validatedData = updateProjectSchema.parse(body);
 
-    const existing = await sql`
-      SELECT id FROM projects WHERE id = ${id}
-    `;
-    if (existing.length === 0) {
-      return NextResponse.json({ error: "Project not found" }, { status: 404 });
-    }
+//     const existing = await sql`
+//       SELECT id FROM projects WHERE id = ${id}
+//     `;
+//     if (existing.length === 0) {
+//       return NextResponse.json({ error: "Project not found" }, { status: 404 });
+//     }
 
-    const updateData: any = { updated_at: new Date() };
-    Object.entries(validatedData).forEach(([key, value]) => {
-      if (value !== undefined) {
-        updateData[key] = key === "tech_stack" ? JSON.stringify(value) : value;
-      }
-    });
+//     const updateData: any = { updated_at: new Date() };
+//     Object.entries(validatedData).forEach(([key, value]) => {
+//       if (value !== undefined) {
+//         updateData[key] = key === "tech_stack" ? JSON.stringify(value) : value;
+//       }
+//     });
 
-    if (Object.keys(updateData).length === 1) {
-      return NextResponse.json(
-        { error: "No fields to update" },
-        { status: 400 }
-      );
-    }
+//     if (Object.keys(updateData).length === 1) {
+//       return NextResponse.json(
+//         { error: "No fields to update" },
+//         { status: 400 }
+//       );
+//     }
 
-    const result = await sql`
-      UPDATE projects
-      SET ${sql(updateData)}
-      WHERE id = ${id}
-      RETURNING *
-    `;
+//     const result = await sql`
+//       UPDATE projects
+//       SET ${sql(updateData)}
+//       WHERE id = ${id}
+//       RETURNING *
+//     `;
 
-    const updatedProject = result[0];
-    updatedProject.tech_stack = JSON.parse(updatedProject.tech_stack);
+//     const updatedProject = result[0];
+//     updatedProject.tech_stack = JSON.parse(updatedProject.tech_stack);
 
-    return NextResponse.json(updatedProject, { status: 200 });
-  } catch (error) {
-    console.error("Error updating project:", error);
-    if (error instanceof z.ZodError) {
-      return NextResponse.json(
-        { error: "Validation failed", details: error.errors },
-        { status: 400 }
-      );
-    }
-    return NextResponse.json(
-      { error: "Failed to update project" },
-      { status: 500 }
-    );
-  }
-}
+//     return NextResponse.json(updatedProject, { status: 200 });
+//   } catch (error) {
+//     console.error("Error updating project:", error);
+//     if (error instanceof z.ZodError) {
+//       return NextResponse.json(
+//         { error: "Validation failed", details: error.errors },
+//         { status: 400 }
+//       );
+//     }
+//     return NextResponse.json(
+//       { error: "Failed to update project" },
+//       { status: 500 }
+//     );
+//   }
+// }
 
 /* DELETE (delete project) */
 
-export async function DELETE(
-  request: NextRequest,
-  { params }: { params: { id: string } }
-) {
-  try {
-    const sql = await getDBConnection();
-    const { id } = params;
+// export async function DELETE(
+//   request: NextRequest,
+//   { params }: { params: { id: string } }
+// ) {
+//   try {
+//     const sql = await getDBConnection();
+//     const { id } = params;
 
-    const result = await sql`
-      DELETE FROM projects
-      WHERE id = ${id}
-      RETURNING id
-    `;
+//     const result = await sql`
+//       DELETE FROM projects
+//       WHERE id = ${id}
+//       RETURNING id
+//     `;
 
-    if (result.length === 0) {
-      return NextResponse.json({ error: "Project not found" }, { status: 404 });
-    }
+//     if (result.length === 0) {
+//       return NextResponse.json({ error: "Project not found" }, { status: 404 });
+//     }
 
-    return NextResponse.json(
-      { message: "Project deleted successfully" },
-      { status: 200 }
-    );
-  } catch (error) {
-    console.error("Error deleting project:", error);
-    return NextResponse.json(
-      { error: "Failed to delete project" },
-      { status: 500 }
-    );
-  }
-}
+//     return NextResponse.json(
+//       { message: "Project deleted successfully" },
+//       { status: 200 }
+//     );
+//   } catch (error) {
+//     console.error("Error deleting project:", error);
+//     return NextResponse.json(
+//       { error: "Failed to delete project" },
+//       { status: 500 }
+//     );
+//   }
+// }

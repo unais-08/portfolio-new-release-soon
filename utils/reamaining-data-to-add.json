@@ -1,0 +1,79 @@
+[
+  {
+    "_id": "6790a28e9cfc05ec21006087",
+    "name": "Tours Website",
+    "description": "React tours website using use Effect to fetch data.",
+    "githubUrl": "https://github.com/Unais01/react-projects",
+    "liveUrl": "https://tours-website-react.netlify.app/",
+    "techStack": ["React"],
+    "images": "https://res.cloudinary.com/unaiscloudinary/image/upload/v1737471077/project%20images/tours-website_luhv0g.png",
+    "category": "Frontend",
+    "featured": false
+  },
+  {
+    "_id": "6790a3029cfc05ec2100608a",
+    "name": "Reviews Slider",
+    "description": "develop slider logic in react in beginner mode.",
+    "githubUrl": "https://github.com/Unais01/react-projects/tree/main/03-Reviews%20Slider",
+    "liveUrl": "https://reviews-slide-reactjs.netlify.app/",
+    "techStack": ["REACT"],
+    "images": "https://res.cloudinary.com/unaiscloudinary/image/upload/v1737471075/project%20images/testimonials_k23zpo.webp",
+    "category": "Frontend",
+    "featured": false
+  },
+  {
+    "_id": "6790a3649cfc05ec2100608d",
+    "name": "accordian",
+    "description": "Accordion for FAQ's in react.",
+    "githubUrl": "https://github.com/Unais01/react-projects/tree/main/04-Accordion",
+    "liveUrl": "https://accordion-layout-react.netlify.app/",
+    "techStack": ["REACT"],
+    "images": "https://res.cloudinary.com/unaiscloudinary/image/upload/v1737471079/project%20images/accordian_esnysl.webp",
+    "category": "Frontend",
+    "featured": false
+  },
+  {
+    "_id": "6790a3b79cfc05ec21006090",
+    "name": "Tabs",
+    "description": "Tabs layout in react.",
+    "githubUrl": "https://github.com/Unais01/react-projects/tree/main/06-Tab",
+    "liveUrl": "https://tabs-reactjs.netlify.app/",
+    "techStack": ["REACT"],
+    "images": "https://res.cloudinary.com/unaiscloudinary/image/upload/v1737471073/project%20images/tabs_f39c2s.webp",
+    "category": "Frontend",
+    "featured": false
+  },
+  {
+    "_id": "6790a49c9cfc05ec21006096",
+    "name": "Restaurant Menu",
+    "description": "Restaurant menu in react with searching sorting functionality according to meals.",
+    "githubUrl": "https://github.com/Unais01/react-projects/tree/main/05-Restaurant%20Menu",
+    "liveUrl": "https://restaurant-menu-reactv1.netlify.app/",
+    "techStack": ["React", "CSS"],
+    "images": "https://res.cloudinary.com/unaiscloudinary/image/upload/v1737471069/project%20images/rest-menu_njxbrk.webp",
+    "category": "Frontend",
+    "featured": false
+  },
+  {
+    "_id": "6790a8fcf9fcb979706ec81a",
+    "name": "Testimonials",
+    "description": "Testimonial UI in react",
+    "githubUrl": "https://github.com/Unais01/react-projects/tree/main/07-Slider",
+    "liveUrl": "https://slider-react-unais.netlify.app/",
+    "techStack": ["React", "CSS"],
+    "images": "https://res.cloudinary.com/unaiscloudinary/image/upload/v1737471069/project%20images/reviews-slider_y5sqfj.webp",
+    "category": "Frontend",
+    "featured": false
+  },
+  {
+    "_id": "67babec81277a87f9b925b0d",
+    "name": "Custom-GPT",
+    "description": "Developed a full-stack AI-powered chat application that enables users to interact with both human contacts and an AI assistant for intelligent, context-aware conversations. The app includes key features such as user authentication, AI-driven responses, message history, and role-based access control. Built using MERN stack, Clerk for authentication, and Gemini Flash for AI capabilities, the application ensures a seamless and responsive user experience with a scalable backend.",
+    "githubUrl": "https://github.com/unais-08/custom-ai",
+    "liveUrl": "https://custom-ai-client.netlify.app/",
+    "techStack": ["REACT", "TAILWIND", "NODE", "EXPRESS", "MONGODB"],
+    "images": "https://res.cloudinary.com/unaiscloudinary/image/upload/v1740291756/project%20images/ssddd_uojyx3.png",
+    "category": "Full Stack",
+    "featured": true
+  }
+]

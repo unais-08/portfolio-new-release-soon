@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { ExternalLink, Github } from "lucide-react";
 
 import {
@@ -15,9 +15,7 @@ import {
 } from "@/components/ui/card";
 
 import { Button } from "@/components/ui/button";
-import { featuredProjects } from "@/utils/featured-projects";
 
-// Correct interface
 export interface Project {
   id: string;
   name: string;
@@ -31,7 +29,6 @@ export interface Project {
   updated_at?: string;
 }
 
-// ImageWithFallback component
 function ImageWithFallback({
   src,
   alt,
@@ -58,8 +55,27 @@ function ImageWithFallback({
   );
 }
 
-// ProjectsSection component
 export function ProjectsSection() {
+  const [projects, setProjects] = useState<Project[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchProjects = async () => {
+      try {
+        const res = await fetch("/api/projects?limit=3");
+        if (!res.ok) throw new Error("Failed to fetch projects");
+        const data = await res.json();
+        setProjects(data);
+      } catch (error) {
+        console.error(error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchProjects();
+  }, []);
+
   return (
     <section id="projects" className="container py-16">
       <div className="text-center mb-12">
@@ -72,8 +88,12 @@ export function ProjectsSection() {
         </p>
       </div>
 
+      {loading && (
+        <p className="text-center text-muted-foreground">Loading projects...</p>
+      )}
+
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {featuredProjects.map((project: Project) => (
+        {projects.map((project: Project) => (
           <Card key={project.id} className="flex flex-col h-full">
             <CardHeader className="relative h-48 w-full overflow-hidden rounded-t-xl">
               <ImageWithFallback
